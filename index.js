@@ -11,7 +11,6 @@ function writeToFile(fileName, fileContent) {
 
 const readmeData = ({
   title,
-  repo,
   description,
   installation,
   usage,
@@ -22,8 +21,8 @@ const readmeData = ({
   email,
   questions,
 }) =>
-  `<a name='readme-top'></a>
-  ![GitHub](https://img.shields.io/github/license/${username}/${repo})
+  `<a id='readme-top'></a>
+  ![GitHub](https://img.shields.io/badge/license-${license.toString().split(' ').join('')}-blue)
   # ${title}
 
   ### Table of Contents
@@ -57,7 +56,9 @@ const readmeData = ({
 
   ## Questions
   ${questions}
+  <br>
   GitHub - [${username}](https://github.com/${username})
+  <br>
   Email - [${email}](mailto:${email})
   <p align="right">(<a href="#readme-top">back to top</a>)</p>`;
 
@@ -93,11 +94,6 @@ function readmePrompts() {
       },
       {
         type: 'input',
-        message: 'What is the name of the repo?',
-        name: 'repo',
-      },
-      {
-        type: 'input',
         message: 'What is the description of the project?',
         name: 'description',
       },
@@ -112,8 +108,18 @@ function readmePrompts() {
         name: 'usage',
       },
       {
-        type: 'input',
+        type: 'checkbox',
         message: 'Which license are you using?',
+        choices: [
+          'GNU AGPLv3',
+          'GNU GPLv3',
+          'GNU LGPLv3',
+          'Mozilla Public 2.0',
+          'Apache 2.0',
+          'MIT',
+          'Boost Software 1.0',
+          'the Unlicense',
+        ],
         name: 'license',
       },
       {
